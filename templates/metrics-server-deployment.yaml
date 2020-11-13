@@ -13,6 +13,9 @@ spec:
     matchLabels:
       app: {{ template "metrics-server.name" . }}
       release: {{ .Release.Name }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
   replicas: {{ .Values.replicas }}
   template:
     metadata:
@@ -54,6 +57,8 @@ spec:
             - --cert-dir=/tmp
             - --logtostderr
             - --secure-port=8443
+            - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+            - --kubelet-use-node-status-port
             {{- range .Values.args }}
             - {{ . }}
             {{- end }}
@@ -69,19 +74,20 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | trim | nindent 12 }}
           volumeMounts:
-          - name: tmp
+          - name: tmp-dir
             mountPath: /tmp
           {{- with .Values.extraVolumeMounts }}
           {{- toYaml . | nindent 10 }}
           {{- end }}
       nodeSelector:
         {{- toYaml .Values.nodeSelector | trim | nindent 8 }}
+      priorityClassName: system-cluster-critical
       affinity:
         {{- toYaml .Values.affinity | trim | nindent 8 }}
       tolerations:
         {{- toYaml .Values.tolerations | trim | nindent 8 }}
       volumes:
-      - name: tmp
+      - name: tmp-dir
         emptyDir: {}
       {{- with .Values.extraVolumes }}
       {{- toYaml . | nindent 6}}

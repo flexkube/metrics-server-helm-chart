@@ -28,7 +28,7 @@ hostNetwork:
 
 image:
   repository: k8s.gcr.io/metrics-server-amd64
-  tag: v0.3.6
+  tag: v0.4.0
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -72,14 +72,14 @@ extraVolumes: []
 
 livenessProbe:
   httpGet:
-    path: /healthz
+    path: /livez
     port: https
     scheme: HTTPS
   initialDelaySeconds: 20
 
 readinessProbe:
   httpGet:
-    path: /healthz
+    path: /readyz
     port: https
     scheme: HTTPS
   initialDelaySeconds: 20
