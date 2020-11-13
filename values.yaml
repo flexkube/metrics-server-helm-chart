@@ -27,7 +27,7 @@ hostNetwork:
   enabled: false
 
 image:
-  repository: k8s.gcr.io/metrics-server-amd64
+  repository: k8s.gcr.io/metrics-server/metrics-server
   tag: v0.4.0
   pullPolicy: IfNotPresent
 
