@@ -1,7 +1,6 @@
 rbac:
   # Specifies whether RBAC resources should be created
   create: true
-  pspEnabled: false
 
 serviceAccount:
   # Specifies whether a ServiceAccount should be created
@@ -28,7 +27,7 @@ hostNetwork:
 
 image:
   repository: k8s.gcr.io/metrics-server/metrics-server
-  tag: v0.6.0
+  tag: v0.6.1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

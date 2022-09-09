@@ -7,7 +7,6 @@
 Parameter | Description | Default
 --- | --- | ---
 `rbac.create` | Enable Role-based authentication | `true`
-`rbac.pspEnabled` | Enable pod security policy support | `false`
 `serviceAccount.create` | If `true`, create a new service account | `true`
 `serviceAccount.name` | Service account to be used. If not set and `serviceAccount.create` is `true`, a name is generated using the fullname template | ``
 `apiService.create` | Create the v1beta1.metrics.k8s.io API service | `true`
